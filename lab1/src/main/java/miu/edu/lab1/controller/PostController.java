@@ -22,8 +22,12 @@ public class PostController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<Post> getAll(){
-        return postService.getAll();
+    public List<Post> getAll(@RequestParam(value = "author", required = false) String author){
+        if(author == null){
+            return postService.getAll();
+        }else {
+            return postService.getByAuthor(author);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)

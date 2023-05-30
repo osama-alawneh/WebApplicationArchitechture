@@ -36,6 +36,13 @@ public class PostRepoImp implements PostRepo{
     }
 
     @Override
+    public List<Post> getByAuthor(String author) {
+        return posts.stream()
+                .filter(p -> p.getAuthor().equals(author))
+                .toList();
+    }
+
+    @Override
     public void save(Post post) {
         post.setId(postId);
         postId++;

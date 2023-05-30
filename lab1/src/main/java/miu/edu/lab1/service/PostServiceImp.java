@@ -31,6 +31,11 @@ public class PostServiceImp implements PostService{
     }
 
     @Override
+    public List<Post> getByAuthor(String author) {
+        return postRepo.getByAuthor(author);
+    }
+
+    @Override
     public void save(Post post) {
         postRepo.save(post);
     }

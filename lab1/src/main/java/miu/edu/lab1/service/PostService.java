@@ -8,6 +8,7 @@ import java.util.List;
 public interface PostService {
     public List<Post> getAll();
     public PostDto getById(long id);
+    public List<Post> getByAuthor(String author);
     public void save(Post post);
     public void delete(long id);
     public void update(long id, Post post);
