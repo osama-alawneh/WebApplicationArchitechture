@@ -6,7 +6,7 @@ import miu.edu.lab1.domain.PostDto;
 import java.util.List;
 
 public interface PostService {
-    public List<Post> getAll();
+    public List<Post> findAll();
     public PostDto getById(long id);
     public List<Post> getByAuthor(String author);
     public void save(Post post);

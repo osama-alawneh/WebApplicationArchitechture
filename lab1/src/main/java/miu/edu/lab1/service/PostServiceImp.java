@@ -1,5 +1,7 @@
 package miu.edu.lab1.service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import miu.edu.lab1.domain.Post;
 import miu.edu.lab1.domain.PostDto;
 import miu.edu.lab1.repo.PostRepo;
@@ -10,29 +12,32 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Transactional
 public class PostServiceImp implements PostService{
 
+    EntityManager em;
     private final PostRepo postRepo;
     private final ModelMapper modelMapper;
     @Autowired
-    public PostServiceImp(PostRepo postRepo, ModelMapper modelMapper) {
+    public PostServiceImp(PostRepo postRepo, ModelMapper modelMapper, EntityManager em) {
         this.postRepo = postRepo;
         this.modelMapper = modelMapper;
+        this.em = em;
     }
 
     @Override
-    public List<Post> getAll() {
-        return postRepo.getAll();
+    public List<Post> findAll() {
+        return postRepo.findAll();
     }
 
     @Override
     public PostDto getById(long id) {
-        return modelMapper.map(postRepo.getById(id), PostDto.class);
+        return modelMapper.map(postRepo.findById(id), PostDto.class);
     }
 
     @Override
     public List<Post> getByAuthor(String author) {
-        return postRepo.getByAuthor(author);
+        return postRepo.getAllByAuthor(author);
     }
 
     @Override
@@ -42,11 +47,13 @@ public class PostServiceImp implements PostService{
 
     @Override
     public void delete(long id) {
-        postRepo.delete(id);
+        postRepo.deleteById(id);
     }
 
     @Override
     public void update(long id, Post post) {
-        postRepo.update(id, post);
+        PostDto oldPost = getById(id);
+        Post p = modelMapper.map(oldPost, Post.class);
+        postRepo.save(p);
     }
 }

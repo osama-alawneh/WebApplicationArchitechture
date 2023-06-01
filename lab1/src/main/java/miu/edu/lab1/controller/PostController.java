@@ -22,9 +22,9 @@ public class PostController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<Post> getAll(@RequestParam(value = "author", required = false) String author){
+    public List<Post> findAll(@RequestParam(value = "author", required = false) String author){
         if(author == null){
-            return postService.getAll();
+            return postService.findAll();
         }else {
             return postService.getByAuthor(author);
         }
@@ -33,7 +33,7 @@ public class PostController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/v2")
     public List<Post> getAll2(){
-        return postService.getAll();
+        return postService.findAll();
     }
 
 
