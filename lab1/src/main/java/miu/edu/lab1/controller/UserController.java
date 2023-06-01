@@ -3,6 +3,7 @@ package miu.edu.lab1.controller;
 import miu.edu.lab1.domain.Post;
 import miu.edu.lab1.domain.Users;
 import miu.edu.lab1.service.UserService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +20,11 @@ public class UserController {
     }
 
     @GetMapping
-    public List<Users> findAll(){
-        return userService.findAll();
+    public List<Users> findAll(@RequestParam(value = "moreThanOne", required = false) String posts){
+        if(posts == null){
+            return userService.findAll();
+        }
+        return userService.findUsersHaveMoreThanOnePost();
     }
 
     @GetMapping("/{id}")

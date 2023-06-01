@@ -16,4 +16,5 @@ public interface UserService {
     public void saveUserPost(long id,Post post);
     public List<Post> findPostsByUserId(long userId);
     public Post findPostByUserIdAndPostId(long userId, long postId);
+    public List<Users> findUsersHaveMoreThanOnePost();
 }

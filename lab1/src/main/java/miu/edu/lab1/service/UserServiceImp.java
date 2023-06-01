@@ -75,4 +75,11 @@ public class UserServiceImp implements UserService {
                 .findFirst()
                 .orElse(null);
     }
+
+    @Override
+    public List<Users> findUsersHaveMoreThanOnePost() {
+        return userRepo.findAll().stream()
+                .filter(u -> u.getPosts().size() > 1)
+                .toList();
+    }
 }
