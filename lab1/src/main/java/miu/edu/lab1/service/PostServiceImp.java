@@ -31,8 +31,8 @@ public class PostServiceImp implements PostService{
     }
 
     @Override
-    public PostDto getById(long id) {
-        return modelMapper.map(postRepo.findById(id), PostDto.class);
+    public Post findById(long id) {
+        return postRepo.findById(id).orElse(null);
     }
 
     @Override
@@ -52,8 +52,10 @@ public class PostServiceImp implements PostService{
 
     @Override
     public void update(long id, Post post) {
-        PostDto oldPost = getById(id);
-        Post p = modelMapper.map(oldPost, Post.class);
-        postRepo.save(p);
+        Post oldPost = findById(id);
+        postRepo.save(oldPost);
+    }
+    public List<Post> findAllByTitle(String title){
+        return postRepo.findAllByTitle(title);
     }
 }

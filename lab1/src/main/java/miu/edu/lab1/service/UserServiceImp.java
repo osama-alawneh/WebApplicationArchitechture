@@ -82,4 +82,8 @@ public class UserServiceImp implements UserService {
                 .filter(u -> u.getPosts().size() > 1)
                 .toList();
     }
+
+    public List<Users> findAllByPostsMoreThan(int num){
+        return userRepo.findAllByPostsMoreThan(num);
+    }
 }
