@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/posts")
 @Transactional
+@CrossOrigin(origins = "http://localhost:3000")
 public class PostController {
     private final PostService postService;
     @Autowired
@@ -26,7 +27,7 @@ public class PostController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     public List<Post> findAll(@RequestParam(value = "author", required = false) String author,
-                              @RequestParam(value = "title") String title){
+                              @RequestParam(value = "title", required = false) String title){
         if(author != null){
             return postService.getByAuthor(author);
         }

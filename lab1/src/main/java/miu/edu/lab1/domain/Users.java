@@ -16,7 +16,7 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String name;
-
+    String password;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     List<Post> posts;

@@ -16,7 +16,7 @@ public class Logger {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long transactionId;
     Date transactionDate;
-    @OneToOne(mappedBy = "user")
+    @OneToOne
     @JoinColumn
     Users Principle;
     String Operation;
